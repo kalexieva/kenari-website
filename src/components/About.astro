@@ -1,0 +1,89 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section class="about">
+	<div class="stack gap-2 lg:gap-4 about-info">
+		<h2>About Us</h2>
+		<p>
+			Kenari is a non-professional dance group where we dance for fun! We primarily dance Bulgarian (and other Balkan) folk dances,
+			but we also explore dances from other parts of the world. We don't have an official teacher; we use the internet to teach ourselves
+			and would love to have people come and teach us others.
+		</p>
+		<p>
+			All skill levels are welcome, and no previous experience or Balkan/Bulgarian familiarity is required. We welcome everyone,
+			regardless of your background. Participation in performances is completely optional.
+		</p>
+	</div>
+	<div class="box gap-2 lg:gap-4 practice-info">
+		<h2>Come dance with us!</h2>
+		<p class="practice-details">
+			<strong>Every Thursday</strong><br />
+			<strong>6:30-8:30pm</strong><br />
+			<a href="https://maps.app.goo.gl/XSJthEpUX5UNLvwD7" target="_blank" rel="noopener noreferrer">
+				Escalante Multi-Generational Center<br />
+				2150 E Orange St., Tempe, AZ 85281
+			</a>
+		</p>
+	</div>
+</section>
+
+<style>
+	.box {
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.about,
+	.about > .stack {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		text-align: center;
+		align-items: center;
+	}
+
+	.about > .stack {
+		gap: 0.5rem;
+	}
+
+	@media (min-width: 50em) {
+		.about > .stack {
+			gap: 1rem;
+		}
+	}
+
+	.practice-info,
+	.about-info {
+		max-width: 90ch;
+	}
+
+	.practice-details {
+		font-size: var(--text-lg);
+		line-height: 1.5;
+	}
+
+	.about h2 {
+		font-size: var(--text-lg);
+	}
+
+	hr {
+		border: 0;
+		border-top: 1px solid var(--gray-800);
+		width: 100%;
+	}
+
+	@media (min-width: 50em) {
+		.box {
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+		}
+
+		.about h2 {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>
