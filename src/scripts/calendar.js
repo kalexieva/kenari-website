@@ -44,12 +44,14 @@ if (calendarEl) {
 				minute: '2-digit' 
 			});
 			const location = event.extendedProps.location || 'No location provided';
+			const description = event.extendedProps.description || 'No description provided';
 
 			const popover = document.getElementById('event-details-popover');
 			if (popover) {
 				document.getElementById('popover-title').innerText = event.title;
 				document.getElementById('popover-time').innerText = start;
 				document.getElementById('popover-location').innerText = location;
+				document.getElementById('popover-description').innerText = description;
 				
 				popover.classList.remove('popover-hidden');
 
