@@ -8,15 +8,15 @@ import Pill from '../../components/Pill.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 interface Props {
-	entry: CollectionEntry<'work'>;
+	entry: CollectionEntry<'past-events'>;
 }
 
 // This is a dynamic route that generates a page for every Markdown file in src/content/
 // Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
 // https://docs.astro.build/en/guides/routing/#dynamic-routes
 export async function getStaticPaths() {
-	const work = await getCollection('work');
-	return work.map((entry) => ({
+	const pastEvents = await getCollection('past-events');
+	return pastEvents.map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry },
 	}));
@@ -31,20 +31,28 @@ const { Content } = await render(entry);
 		<div class="stack gap-15">
 			<header>
 				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+					<a class="back-link" href="/past-events/"><Icon icon="arrow-left" /> Past Events</a>
 					<Hero title={entry.data.title} align="start">
 						<div class="details">
-							<div class="tags">
-								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
-							</div>
-							<p class="description">{entry.data.description}</p>
+							<p class="description">
+								{entry.data.eventDate.toLocaleDateString('en-US', {
+									timeZone: 'UTC',
+									month: 'short',
+									day: 'numeric',
+									year: 'numeric'
+								})}
+							</p>
 						</div>
 					</Hero>
 				</div>
 			</header>
 			<main class="wrapper">
 				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					<div class="gallery-grid">
+						{entry.data.gallery && entry.data.gallery.map((image) => (
+							<img src={image} alt={`Photo from ${entry.data.title}`} loading="lazy" />
+						))}
+					</div>
 					<div class="content">
 						<Content />
 					</div>
