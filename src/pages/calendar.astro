@@ -1,0 +1,192 @@
+---
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Calendar | Kenari" description="Calendar of practices and events.">
+	<div class="stack gap-20">
+		<main class="wrapper about">
+			<Hero
+				title="Calendar"
+				tagline="See our calendar for upcoming practices, performances and events."
+			/>
+
+			<section>
+				<div id="calendar"></div>
+			</section>
+
+			<!-- Event Details Popover -->
+			<div id="event-details-popover" class="popover-hidden">
+				<header>
+					<h2 id="popover-title"></h2>
+					<button id="close-popover" aria-label="close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</header>
+				<article>
+					<div class="popover-info">
+						<strong>Time:</strong> <span id="popover-time"></span>
+					</div>
+					<div class="popover-info">
+						<strong>Location:<br/></strong> <span id="popover-location"></span>
+					</div>
+				</article>
+			</div>
+		</main>
+	</div>
+</BaseLayout>
+
+<script src="../scripts/calendar.js"></script>
+
+<style>
+	.about {
+		display: flex;
+		flex-direction: column;
+		gap: 3.5rem;
+	}
+
+	img {
+		margin-top: 1.5rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		color: var(--gray-200);
+	}
+
+	#calendar {
+		width: 100%;
+		background-color: var(--gray-999);
+		padding: 1rem;
+		border-radius: 0.75rem;
+		border: 1px solid var(--gray-800);
+		box-shadow: var(--shadow-sm);
+		font-size: 0.85rem;
+	}
+
+	#calendar :global(.fc-event) {
+		cursor: pointer;
+	}
+
+	#calendar :global(.fc-event-main),
+	#calendar :global(.fc-event-title) {
+		/* white-space: normal; */
+	}
+
+	/* Popover Styles */
+	#event-details-popover {
+		position: absolute;
+		z-index: 1000;
+		background-color: var(--gray-900);
+		color: var(--gray-200);
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 0;
+		width: 90%;
+		max-width: 350px;
+		box-shadow: var(--shadow-lg);
+		display: flex;
+		flex-direction: column;
+	}
+
+	.popover-hidden {
+		display: none !important;
+	}
+
+	#event-details-popover header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		border-bottom: 1px solid var(--gray-800);
+		background-color: var(--gray-999);
+		border-radius: 0.75rem 0.75rem 0 0;
+	}
+
+	#event-details-popover h2 {
+		font-size: var(--text-md);
+		color: var(--gray-0);
+		margin: 0;
+	}
+
+	#event-details-popover header button {
+		background: transparent;
+		border: none;
+		color: var(--gray-400);
+		font-size: 1.25rem;
+		cursor: pointer;
+		line-height: 1;
+	}
+
+	#event-details-popover header button:hover {
+		color: var(--gray-0);
+	}
+
+	#event-details-popover article {
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		font-size: var(--text-sm);
+	}
+
+	.popover-info strong {
+		color: var(--gray-0);
+	}
+
+	.popover-description {
+		margin-top: 0.25rem;
+	}
+
+	.popover-description strong {
+		display: block;
+		color: var(--gray-0);
+		margin-bottom: 0.125rem;
+	}
+
+	.section-title {
+		grid-column-start: 1;
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+	}
+
+	.content {
+		grid-column: 2 / 4;
+	}
+
+	.content :global(a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.content :global(a:hover),
+	.content :global(a:focus) {
+		text-decoration-color: currentColor;
+	}
+
+	@media (min-width: 50em) {
+		.about {
+			display: grid;
+			grid-template-columns: 1fr 80% 1fr;
+		}
+
+		.about > :global(:first-child) {
+			grid-column-start: 2;
+		}
+
+		#calendar {
+			grid-column: 2 / 3;
+			min-height: 600px;
+		}
+
+		section {
+			display: contents;
+		}
+	}
+</style>
