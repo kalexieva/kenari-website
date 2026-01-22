@@ -6,7 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Calendar | Kenari" description="Calendar of practices and events.">
 	<div class="stack gap-20">
-		<main class="wrapper about">
+		<main class="wrapper calendar">
 			<Hero
 				title="Calendar"
 				tagline="See our calendar for upcoming practices, performances and events."
@@ -43,7 +43,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <script src="../scripts/calendar.js"></script>
 
 <style>
-	.about {
+	.calendar {
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;
@@ -92,7 +92,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		padding: 0;
 		width: 90%;
 		max-width: 350px;
-		box-shadow: var(--shadow-lg);
+		box-shadow: var(--shadow-sm);
 		display: flex;
 		flex-direction: column;
 	}
@@ -174,12 +174,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	}
 
 	@media (min-width: 50em) {
-		.about {
+		.calendar {
 			display: grid;
 			grid-template-columns: 1fr 80% 1fr;
 		}
 
-		.about > :global(:first-child) {
+		.calendar > :global(:first-child) {
 			grid-column-start: 2;
 		}
 
