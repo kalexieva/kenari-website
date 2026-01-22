@@ -1,0 +1,66 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section class="practice-info">
+	<div class="box stack gap-2 lg:gap-4">
+		<h3>Come dance with us!</h3>
+		<hr />
+		<div class="practice-details">
+			<div class="bottom-space">
+				<p><strong>Every Thursday</strong></p>
+				<p><strong>6:30 - 8:30 pm</strong></p>
+			</div>
+			<div class="bottom-space">
+				<a href="https://maps.app.goo.gl/XSJthEpUX5UNLvwD7" target="_blank" rel="noopener noreferrer" class="address">
+					<span>Escalante Multi-Generational Center</span>
+					<span>2150 E Orange St., Tempe, AZ 85281</span>
+				</a>
+			</div>
+			<div class="bottom-space">
+				<p>$5 per practice</p>
+				<p>(cash only, please bring with you)</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.box {
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.practice-info {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		align-items: center;
+		max-width: 90ch;
+	}
+
+	.address {
+		display: flex;
+		flex-direction: column;
+	}
+
+	hr {
+		border: 0;
+		border-top: 1px solid var(--gray-800);
+		width: 100%;
+	}
+
+	@media (min-width: 50em) {
+		.box {
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+		}
+
+		.practice-details {
+			font-size: var(--text-lg);
+		}
+	}
+</style>
