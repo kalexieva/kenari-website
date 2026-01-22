@@ -10,6 +10,7 @@ import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import PracticeInfo from '../components/PracticeInfo.astro';
+import About from "../components/About.astro";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -23,20 +24,27 @@ const projects = (await getCollection('past-events'))
 ---
 
 <BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
-			<img
-				src="/assets/stock-1.jpg"
-				alt="Kenari dancing at the Chandler Multi-Cultural Festival"
-			/>
+	<div class="stack gap-20 lg:gap-30">
+		<div class="wrapper stack gap-8" id="home-header">
+			<header class="hero">
+				<Hero
+					title="Kenari Dancers"
+					tagline="Bulgarian folk dancing"
+					align="start"
+				/>
+				<img
+					src="/assets/stock-1.jpg"
+					alt="Kenari dancing at the Chandler Multi-Cultural Festival"
+				/>
+			</header>
 
-			<div class="about-container">
-				<PracticeInfo />
-			</div>
+			<PracticeInfo />
 		</div>
 
+		<About />
+
 		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
+			<section class="section with-background with-cta" id="past-events">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Past Events</h3>
 					<p>Take a look below at some of our past events.</p>
@@ -68,22 +76,11 @@ const projects = (await getCollection('past-events'))
 </BaseLayout>
 
 <style>
-	.about-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
-	}
-
 	.hero {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 2rem;
-	}
-
-	.roles {
-		display: none;
 	}
 
 	.hero img {
@@ -97,21 +94,14 @@ const projects = (await getCollection('past-events'))
 	@media (min-width: 50em) {
 		.hero {
 			display: grid;
-			grid-template-columns: 6fr 4fr;
+			grid-template-columns: 10fr 9fr;
 			padding-inline: 2.5rem;
 			gap: 3.75rem;
 		}
 
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
-
 		.hero img {
 			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
+			border-radius: 3rem;
 		}
 	}
 
@@ -193,28 +183,6 @@ const projects = (await getCollection('past-events'))
 
 		.cta {
 			grid-area: cta;
-		}
-	}
-
-	/* ====================================================== */
-
-	.mention-card {
-		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
-
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
 		}
 	}
 </style>
