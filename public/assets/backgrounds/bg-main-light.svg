@@ -1,1 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="640"><g opacity=".15"><path fill="url(#a)" d="M439.57 249.55A2149.47 2149.47 0 0 1 1633.44 67.1l-12.48 93.17A2055.46 2055.46 0 0 0 479.3 334.74L25.06 546.6l-39.73-85.2z"/><path fill="url(#b)" d="M272.3 265.93a2393.36 2393.36 0 0 1 1328.96 205.6l-44.42 94.78A2288.7 2288.7 0 0 0 286 369.7l-553.29 73.05-13.7-103.77z" opacity=".56"/><path fill="url(#c)" d="M195.26 416.13a2149.47 2149.47 0 0 1 1204.86-83.21l-20.13 91.82A2055.46 2055.46 0 0 0 227.82 504.3l-470.18 173.62-32.56-88.18 470.18-173.62z"/></g><path fill="#fff" d="M-258 718.56 1485.12 201l182.93 616.12-1743.11 517.56z"/><defs><linearGradient id="d"><stop offset=".58" stop-opacity="0"/><stop offset="1"/></linearGradient><linearGradient xlink:href="#d" id="a" x1="793.5" x2="759.5" y1="261.5" y2="149.5" gradientUnits="userSpaceOnUse"/><linearGradient xlink:href="#d" id="b" x1="644.19" x2="645.54" y1="397.02" y2="266.7" gradientUnits="userSpaceOnUse"/><linearGradient xlink:href="#d" id="c" x1="547" x2="522.36" y1="457.27" y2="342.85" gradientUnits="userSpaceOnUse"/></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" preserveAspectRatio="none">
+    <defs>
+        <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="70" />
+        </filter>
+        <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6e40bf" stop-opacity="1" />
+            <stop offset="50%" stop-color="#6e40bf" stop-opacity="0.75" />
+            <stop offset="100%" stop-color="#6e40bf" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="gradGold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffc800" stop-opacity="0.5" />
+            <stop offset="50%" stop-color="#ffc800" stop-opacity="1" />
+            <stop offset="100%" stop-color="#ffc800" stop-opacity="1" />
+        </linearGradient>
+        <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d62612" stop-opacity="0" />
+            <stop offset="50%" stop-color="#d62612" stop-opacity="0.75" />
+            <stop offset="100%" stop-color="#d62612" stop-opacity="1" />
+        </linearGradient>
+        <linearGradient id="gradLightRed" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f27769" stop-opacity="0" />
+            <stop offset="50%" stop-color="#f27769" stop-opacity="0.75" />
+            <stop offset="100%" stop-color="#f27769" stop-opacity="1" />
+        </linearGradient>
+        <linearGradient id="bottomFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="30%" stop-color="#ffffff" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
+        </linearGradient>
+    </defs>
+    <rect width="1440" height="640" fill="#ffffff"/>
+    <g filter="url(#blur)">
+        <rect x="-100" y="-150" width="1000" height="400" fill="url(#gradPurple)" transform="rotate(-20 800 120)" />
+        <rect x="50" y="-120" width="600" height="40" fill="url(#gradGold)" transform="rotate(-20 800 120)" />
+        <rect x="-10" y="200" width="1500" height="200" fill="url(#gradLightRed)" transform="rotate(-20 600 300)" />
+        <rect x="-100" y="0" width="1500" height="200" fill="url(#gradRed)" transform="rotate(-20 800 120)" />
+    </g>
+    <rect width="1440" height="640" fill="url(#bottomFade)"/>
+</svg>
