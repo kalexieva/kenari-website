@@ -8,7 +8,7 @@ import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
+import EventsPreview from '../components/EventsPreview.astro';
 import PracticeInfo from '../components/PracticeInfo.astro';
 import About from "../components/About.astro";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
@@ -55,7 +55,7 @@ const projects = (await getCollection('past-events'))
 						{
 							projects.map((project) => (
 								<li>
-									<PortfolioPreview project={project} />
+									<EventsPreview project={project} />
 								</li>
 							))
 						}
