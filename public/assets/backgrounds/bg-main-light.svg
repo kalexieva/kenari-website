@@ -3,15 +3,15 @@
         <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="70" />
         </filter>
-        <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#6e40bf" stop-opacity="1" />
-            <stop offset="50%" stop-color="#6e40bf" stop-opacity="0.75" />
-            <stop offset="100%" stop-color="#6e40bf" stop-opacity="0" />
+        <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#39b54a" stop-opacity="1" />
+            <stop offset="50%" stop-color="#39b54a" stop-opacity="0.75" />
+            <stop offset="100%" stop-color="#39b54a" stop-opacity="0" />
         </linearGradient>
-        <linearGradient id="gradGold" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ffc800" stop-opacity="0.5" />
-            <stop offset="50%" stop-color="#ffc800" stop-opacity="1" />
-            <stop offset="100%" stop-color="#ffc800" stop-opacity="1" />
+        <linearGradient id="gradLightGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#83d88e" stop-opacity="0.5" />
+            <stop offset="50%" stop-color="#83d88e" stop-opacity="1" />
+            <stop offset="100%" stop-color="#83d88e" stop-opacity="1" />
         </linearGradient>
         <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#d62612" stop-opacity="0" />
@@ -30,10 +30,10 @@
     </defs>
     <rect width="1440" height="640" fill="#ffffff"/>
     <g filter="url(#blur)">
-        <rect x="-100" y="-150" width="1000" height="400" fill="url(#gradPurple)" transform="rotate(-20 800 120)" />
-        <rect x="50" y="-120" width="600" height="40" fill="url(#gradGold)" transform="rotate(-20 800 120)" />
-        <rect x="-10" y="200" width="1500" height="200" fill="url(#gradLightRed)" transform="rotate(-20 600 300)" />
-        <rect x="-100" y="0" width="1500" height="200" fill="url(#gradRed)" transform="rotate(-20 800 120)" />
+        <rect x="-100" y="-200" width="500" height="500" fill="url(#gradGreen)" transform="rotate(-20 800 120)" />
+        <rect x="150" y="-120" width="400" height="40" fill="url(#gradLightGreen)" transform="rotate(-20 800 120)" />
+        <rect x="300" y="200" width="1200" height="200" fill="url(#gradLightRed)" transform="rotate(-20 600 300)" />
+        <rect x="100" y="0" width="1200" height="200" fill="url(#gradRed)" transform="rotate(-20 800 120)" />
     </g>
     <rect width="1440" height="640" fill="url(#bottomFade)"/>
 </svg>
