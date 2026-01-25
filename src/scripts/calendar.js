@@ -2,15 +2,15 @@ import {Calendar} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import rrulePlugin from '@fullcalendar/rrule';
 
 const calendarEl = document.getElementById('calendar');
 if (calendarEl) {
-	let calendarExclusions = [];
-
 	const calendar = new Calendar(calendarEl, {
-		plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
+		plugins: [dayGridPlugin, timeGridPlugin, listPlugin, rrulePlugin],
 		initialView: 'dayGridMonth',
 		timeZone: 'local',
+		eventColor: 'var(--accent-regular)',
 		headerToolbar: {
 			left: 'prev,next today',
 			center: 'title',
@@ -21,12 +21,11 @@ if (calendarEl) {
 				const response = await fetch('/events.json');
 				const data = await response.json();
 				
-				let events = [];
+				let events;
 				if (Array.isArray(data)) {
 					events = data;
 				} else {
 					events = data.events || [];
-					calendarExclusions = data.exclusions || [];
 				}
 				
 				successCallback(events);
@@ -34,7 +33,7 @@ if (calendarEl) {
 				failureCallback(error);
 			}
 		},
-		eventClick: function(info) {
+		eventMouseEnter: function(info) {
 			const event = info.event;
 			const start = event.start.toLocaleString([], { 
 				weekday: 'long', 
@@ -44,14 +43,12 @@ if (calendarEl) {
 				minute: '2-digit' 
 			});
 			const location = event.extendedProps.location || 'No location provided';
-			const description = event.extendedProps.description || 'No description provided';
 
 			const popover = document.getElementById('event-details-popover');
 			if (popover) {
 				document.getElementById('popover-title').innerText = event.title;
 				document.getElementById('popover-time').innerText = start;
 				document.getElementById('popover-location').innerText = location;
-				document.getElementById('popover-description').innerText = description;
 				
 				popover.classList.remove('popover-hidden');
 
@@ -76,25 +73,18 @@ if (calendarEl) {
 				popover.style.top = `${top}px`;
 				popover.style.left = `${left}px`;
 			}
-			
+
 			// Prevent the browser from following any link in the event
 			info.jsEvent.preventDefault();
 		},
+		eventMouseLeave: function(info) {
+			const popover = document.getElementById('event-details-popover');
+			if (popover) {
+				popover.classList.add('popover-hidden');
+			}
+		},
 		eventDidMount: function(info) {
 			if (info.event.start) {
-				// Use ISO string to get the date in the event's local time (which is the viewer's local time due to timeZone: 'local')
-				// We need YYYY-MM-DD for exclusion matching. 
-				// info.event.start is a native Date object in the browser's local time.
-				const year = info.event.start.getFullYear();
-				const month = String(info.event.start.getMonth() + 1).padStart(2, '0');
-				const day = String(info.event.start.getDate()).padStart(2, '0');
-				const dateStr = `${year}-${month}-${day}`;
-				
-				// Hide if in exclusions list
-				if (calendarExclusions.includes(dateStr)) {
-					info.el.style.display = 'none';
-				}
-
 				// Add a tooltip with full title and location
 				const location = info.event.extendedProps.location;
 				let tooltipText = info.event.title;

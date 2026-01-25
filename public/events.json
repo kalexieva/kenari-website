@@ -2,16 +2,26 @@
   "events": [
     {
       "title": "Practice",
-      "daysOfWeek": [4],
-      "startTime": "18:30:00-07:00",
-      "endTime": "20:30:00-07:00",
-      "location": "Escalante Multi-Generational Center\n2150 E Orange St., Tempe, AZ 85281"
+      "location": "Escalante Multi-Generational Center\n2150 E Orange St., Tempe, AZ 85281",
+      "duration": "02:00",
+      "rrule": {
+        "freq": "weekly",
+        "byweekday": [ "th" ],
+        "dtstart": "2026-01-08T18:30:00",
+        "until": "2027-01-01"
+      },
+      "exdate": [
+        "2026-06-04T18:30:00",
+        "2026-06-11T18:30:00",
+        "2026-06-18T18:30:00",
+        "2026-06-25T18:30:00"
+      ]
     },
     {
       "title": "Chandler Multicultural Festival",
       "start": "2026-01-17T12:30:00-07:00",
       "location": "Dr. A.J. Chandler Park: Stage Plaza\n178 E. Commonwealth Ave., Chandler, AZ 85225",
-      "description": "https://www.chandleraz.gov/events/chandler-multicultural-festival"
+      "url": "https://www.chandleraz.gov/events/chandler-multicultural-festival"
     },
     {
       "title": "Professor Anton Lesson",
@@ -31,12 +41,5 @@
       "allDay": true,
       "location": "Desert Breeze Park\n660 North Desert Breeze Blvd E, Chandler, AZ 85226"
     }
-  ],
-  "exclusions": [
-    "2026-01-01",
-    "2026-06-04",
-    "2026-06-11",
-    "2026-06-18",
-    "2026-06-25"
   ]
 }

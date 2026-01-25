@@ -31,9 +31,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<div class="popover-info">
 						<strong>Location:<br/></strong> <span id="popover-location"></span>
 					</div>
-					<div class="popover-info">
-						<strong>Description:<br/></strong> <span id="popover-description"></span>
-					</div>
 				</article>
 			</div>
 		</main>
@@ -67,7 +64,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		background-color: var(--gray-999);
 		padding: 1rem;
 		border-radius: 0.75rem;
-		border: 1px solid var(--gray-800);
+		border: 1px solid var(--fc-border-color, var(--gray-800));
 		box-shadow: var(--shadow-sm);
 		font-size: 0.85rem;
 	}
@@ -76,9 +73,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		cursor: pointer;
 	}
 
-	#calendar :global(.fc-event-main),
-	#calendar :global(.fc-event-title) {
-		/* white-space: normal; */
+	/* Fix readability in dark mode and general colors */
+	#calendar :global(.fc-list-day-cushion) {
+		background-color: var(--fc-neutral-bg-color, var(--gray-800));
+	}
+
+	#calendar :global(.fc-list-day-text),
+	#calendar :global(.fc-list-day-side-text) {
+		color: var(--gray-0);
+	}
+
+	#calendar :global(.fc-list-event:hover td) {
+		background-color: var(--fc-list-event-hover-bg-color, var(--gray-800));
+	}
+
+	#calendar :global(a) {
+		color: var(--gray-0);
+	}
+
+	#calendar :global(.fc-col-header-cell-cushion),
+	#calendar :global(.fc-daygrid-day-number),
+	#calendar :global(.fc-daygrid-event) {
+		color: var(--gray-0);
+	}
+
+	#calendar :global(.fc-button) {
+		--fc-border-color: var(--gray-800);
+		--fc-button-bg-color: var(--accent-regular);
+		--fc-button-border-color: var(--accent-regular);
+		--fc-button-hover-bg-color: var(--accent-dark);
+		--fc-button-hover-border-color: var(--accent-dark);
+	}
+
+	#calendar :global(.fc-button-active) {
+		--fc-button-active-bg-color: var(--accent-dark);
+		--fc-button-active-border-color: var(--accent-dark);
+	}
+
+	:global(.theme-dark) #calendar {
+		--fc-border-color: var(--gray-700);
+		--fc-list-event-hover-bg-color: var(--gray-900);
+		--fc-page-bg-color: var(--gray-999);
+		--fc-neutral-bg-color: var(--gray-800);
 	}
 
 	/* Popover Styles */
@@ -140,16 +176,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 	.popover-info strong {
 		color: var(--gray-0);
-	}
-
-	.popover-description {
-		margin-top: 0.25rem;
-	}
-
-	.popover-description strong {
-		display: block;
-		color: var(--gray-0);
-		margin-bottom: 0.125rem;
 	}
 
 	.section-title {
