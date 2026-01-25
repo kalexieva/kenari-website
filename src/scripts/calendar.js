@@ -5,98 +5,21 @@ import listPlugin from '@fullcalendar/list';
 import rrulePlugin from '@fullcalendar/rrule';
 
 const calendarEl = document.getElementById('calendar');
+
 if (calendarEl) {
-	const calendar = new Calendar(calendarEl, {
-		plugins: [dayGridPlugin, timeGridPlugin, listPlugin, rrulePlugin],
-		initialView: 'dayGridMonth',
-		timeZone: 'local',
-		eventColor: 'var(--accent-regular)',
-		headerToolbar: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-		},
-		events: async function(info, successCallback, failureCallback) {
-			try {
-				const response = await fetch('/events.json');
-				const data = await response.json();
-				
-				let events;
-				if (Array.isArray(data)) {
-					events = data;
-				} else {
-					events = data.events || [];
-				}
-				
-				successCallback(events);
-			} catch (error) {
-				failureCallback(error);
-			}
-		},
-		eventMouseEnter: function(info) {
-			const event = info.event;
-			const start = event.start.toLocaleString([], { 
-				weekday: 'long', 
-				month: 'long', 
-				day: 'numeric', 
-				hour: '2-digit', 
-				minute: '2-digit' 
-			});
-			const location = event.extendedProps.location || 'No location provided';
-
-			const popover = document.getElementById('event-details-popover');
-			if (popover) {
-				document.getElementById('popover-title').innerText = event.title;
-				document.getElementById('popover-time').innerText = start;
-				document.getElementById('popover-location').innerText = location;
-				
-				popover.classList.remove('popover-hidden');
-
-				// Position the popover
-				const rect = info.el.getBoundingClientRect();
-				const popoverRect = popover.getBoundingClientRect();
-				
-				let top = rect.top + window.scrollY - popoverRect.height - 10;
-				let left = rect.left + window.scrollX + (rect.width / 2) - (popoverRect.width / 2);
-
-				// Basic boundary checks
-				if (top < window.scrollY) {
-					top = rect.bottom + window.scrollY + 10;
-				}
-				if (left < 10) {
-					left = 10;
-				}
-				if (left + popoverRect.width > window.innerWidth - 10) {
-					left = window.innerWidth - popoverRect.width - 10;
-				}
-
-				popover.style.top = `${top}px`;
-				popover.style.left = `${left}px`;
-			}
-
-			// Prevent the browser from following any link in the event
-			info.jsEvent.preventDefault();
-		},
-		eventMouseLeave: function(info) {
-			const popover = document.getElementById('event-details-popover');
-			if (popover) {
-				popover.classList.add('popover-hidden');
-			}
-		},
-		eventDidMount: function(info) {
-			if (info.event.start) {
-				// Add a tooltip with full title and location
-				const location = info.event.extendedProps.location;
-				let tooltipText = info.event.title;
-				if (location) {
-					tooltipText += ` (${location})`;
-				}
-				info.el.setAttribute('title', tooltipText);
-			}
-		}
-	});
-
+	// We can use mq to adjust the calendar layout for mobile and desktop devices
+	const mq = window.matchMedia('(max-width: 50em)');
+	let calendar = buildCalendar(mq.matches);
 	calendar.render();
+
+	// If the screen crosses the breakpoint, rebuild with mobile/desktop header + view.
+	mq.addEventListener('change', (e) => {
+		const currentDate = calendar.getDate();
+		calendar.destroy();
+		calendar = buildCalendar(e.matches);
+		calendar.render();
+		calendar.gotoDate(currentDate);
+	});
 
 	// Close popover logic
 	const popover = document.getElementById('event-details-popover');
@@ -114,4 +37,98 @@ if (calendarEl) {
 			}
 		});
 	}
+}
+
+function buildCalendar(isMobile) {
+	return new Calendar(calendarEl, {
+		plugins: [dayGridPlugin, timeGridPlugin, listPlugin, rrulePlugin],
+
+		// Mobile: list is readable. Desktop: month grid is fine.
+		initialView: isMobile ? 'listMonth' : 'dayGridMonth',
+
+		timeZone: 'local',
+		eventColor: 'var(--accent-regular)',
+
+		// Mobile header: fewer controls to prevent squishing
+		headerToolbar: isMobile
+			? {left: 'prev,next', center: 'title', right: 'listMonth'}
+			: {left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'},
+
+		// Makes calendar less squished on mobile
+		...(isMobile ? { height: 'auto' } : {}),
+
+		events: async function (_info, successCallback, failureCallback) {
+			try {
+				const response = await fetch('/events.json');
+				const data = await response.json();
+				let events = data.events || [];
+				successCallback(events);
+			} catch (error) {
+				failureCallback(error);
+			}
+		},
+
+		// Open a popover with more event details on mouse hover
+		eventMouseEnter: function (info) {
+			const event = info.event;
+			const start = event.start.toLocaleString([], {
+				weekday: 'long',
+				month: 'long',
+				day: 'numeric',
+				hour: '2-digit',
+				minute: '2-digit'
+			});
+			const location = event.extendedProps.location || 'No location provided';
+
+			const popover = document.getElementById('event-details-popover');
+			if (popover) {
+				document.getElementById('popover-title').innerText = event.title;
+				document.getElementById('popover-time').innerText = start;
+				document.getElementById('popover-location').innerText = location;
+
+				popover.classList.remove('popover-hidden');
+
+				// Position the popover
+				const rect = info.el.getBoundingClientRect();
+				const popoverRect = popover.getBoundingClientRect();
+
+				let top = rect.top + window.scrollY - popoverRect.height - 10;
+				let left = rect.left + window.scrollX + (rect.width / 2) - (popoverRect.width / 2);
+
+				// Basic boundary checks
+				if (top < window.scrollY) {
+					top = rect.bottom + window.scrollY + 10;
+				}
+				if (left < 10) {
+					left = 10;
+				}
+				if (left + popoverRect.width > window.innerWidth - 10) {
+					left = window.innerWidth - popoverRect.width - 10;
+				}
+
+				popover.style.top = `${top}px`;
+				popover.style.left = `${left}px`;
+			}
+		},
+
+		// Close the popover on mouse leave
+		eventMouseLeave: function (_info) {
+			const popover = document.getElementById('event-details-popover');
+			if (popover) {
+				popover.classList.add('popover-hidden');
+			}
+		},
+
+		eventDidMount: function (info) {
+			if (info.event.start) {
+				// Add a tooltip with full title and location
+				const location = info.event.extendedProps.location;
+				let tooltipText = info.event.title;
+				if (location) {
+					tooltipText += ` (${location})`;
+				}
+				info.el.setAttribute('title', tooltipText);
+			}
+		}
+	});
 }
