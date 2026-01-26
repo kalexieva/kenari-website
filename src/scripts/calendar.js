@@ -68,8 +68,8 @@ function buildCalendar(isMobile) {
 			}
 		},
 
-		// Open a popover with more event details on mouse hover
-		eventMouseEnter: function (info) {
+		// Open a popover with more event details on click
+		eventClick: function (info) {
 			const event = info.event;
 			const start = event.start.toLocaleString([], {
 				weekday: 'long',
@@ -79,12 +79,14 @@ function buildCalendar(isMobile) {
 				minute: '2-digit'
 			});
 			const location = event.extendedProps.location || 'No location provided';
+			const locationUrl = event.extendedProps.locationUrl || '';
 
 			const popover = document.getElementById('event-details-popover');
 			if (popover) {
 				document.getElementById('popover-title').innerText = event.title;
 				document.getElementById('popover-time').innerText = start;
 				document.getElementById('popover-location').innerText = location;
+				document.getElementById('popover-location-link').href = locationUrl;
 
 				popover.classList.remove('popover-hidden');
 
@@ -108,14 +110,6 @@ function buildCalendar(isMobile) {
 
 				popover.style.top = `${top}px`;
 				popover.style.left = `${left}px`;
-			}
-		},
-
-		// Close the popover on mouse leave
-		eventMouseLeave: function (_info) {
-			const popover = document.getElementById('event-details-popover');
-			if (popover) {
-				popover.classList.add('popover-hidden');
 			}
 		},
 

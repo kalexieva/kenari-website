@@ -29,7 +29,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 						<strong>Time:</strong> <span id="popover-time"></span>
 					</div>
 					<div class="popover-info">
-						<strong>Location:<br/></strong> <span id="popover-location"></span>
+						<strong>Location:<br/></strong>
+						<a id="popover-location-link" href="" target="_blank" rel="noopener noreferrer">
+							<span id="popover-location"></span>
+						</a>
 					</div>
 				</article>
 			</div>
@@ -67,6 +70,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		border: 1px solid var(--fc-border-color, var(--gray-800));
 		box-shadow: var(--shadow-sm);
 		font-size: 0.85rem;
+		--fc-button-active-bg-color: var(--accent-dark);
+		--fc-button-active-border-color: var(--accent-dark);
+		--fc-border-color: var(--gray-800);
+		--fc-button-bg-color: var(--accent-regular);
+		--fc-button-border-color: var(--accent-regular);
+		--fc-button-hover-bg-color: var(--accent-dark);
+		--fc-button-hover-border-color: var(--accent-dark);
 	}
 
 	#calendar :global(.fc-event) {
@@ -97,24 +107,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		color: var(--gray-0);
 	}
 
-	#calendar :global(.fc-button) {
-		--fc-border-color: var(--gray-800);
-		--fc-button-bg-color: var(--accent-regular);
-		--fc-button-border-color: var(--accent-regular);
-		--fc-button-hover-bg-color: var(--accent-dark);
-		--fc-button-hover-border-color: var(--accent-dark);
-	}
-
-	#calendar :global(.fc-button-active) {
-		--fc-button-active-bg-color: var(--accent-dark);
-		--fc-button-active-border-color: var(--accent-dark);
-	}
-
 	:global(.theme-dark) #calendar {
 		--fc-border-color: var(--gray-700);
 		--fc-list-event-hover-bg-color: var(--gray-900);
 		--fc-page-bg-color: var(--gray-999);
 		--fc-neutral-bg-color: var(--gray-800);
+		--fc-button-active-bg-color: var(--accent-light);
+		--fc-button-active-border-color: var(--accent-light);
 	}
 
 	/* Popover Styles */
