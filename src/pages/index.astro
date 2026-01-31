@@ -13,6 +13,7 @@ import PracticeInfo from '../components/PracticeInfo.astro';
 import About from "../components/About.astro";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import UpcomingEvents from "../components/UpcomingEvents.astro";
 
 // Content Fetching: List four most recent events
 const projects = (await getCollection('past-events'))
@@ -42,6 +43,8 @@ const projects = (await getCollection('past-events'))
 		</div>
 
 		<About />
+
+		<UpcomingEvents />
 
 		<main class="wrapper stack gap-20 lg:gap-48">
 			<section class="section with-background with-cta" id="past-events">

@@ -1,0 +1,119 @@
+---
+type CalendarEvent = {
+    title: string;
+    start?: string;
+    allDay?: boolean;
+    excludeFromUpcoming?: boolean;
+    rrule?: unknown;
+};
+
+// Fetch the same JSON that the calendar uses (keeps one source of truth)
+const res = await fetch(new URL("/events.json", Astro.url));
+const data = (await res.json()) as { events: CalendarEvent[] };
+
+const now = new Date();
+
+// Only show events that have a `start` date, and date >= today
+const upcoming = (data.events ?? [])
+    .filter((e) => !e.excludeFromUpcoming)
+    .filter((e) => typeof e.start === "string" && e.start.length > 0)
+    .map((e) => ({ ...e, startDate: new Date(e.start!) }))
+    .filter((e) => !Number.isNaN(e.startDate.getTime()))
+    .filter((e) => e.startDate >= now)
+    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime())
+    .slice(0, 5);
+
+function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
+    const datePart = new Intl.DateTimeFormat("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    }).format(e.startDate);
+
+    if (e.allDay) return datePart;
+
+    const timePart = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+    }).format(e.startDate);
+
+    return `${datePart} • ${timePart}`;
+}
+---
+
+<section class="outline">
+    <div class="stack gap-8">
+        <h2>Upcoming Events</h2>
+
+        {upcoming.length > 0 ? (
+                <ul class="events-list" aria-label="Upcoming events">
+                    {upcoming.map((e) => (
+                            <li class="event-item">
+                                <div class="event-title">{e.title}</div>
+                                <div class="event-date">{formatEventDate(e)}</div>
+                            </li>
+                    ))}
+                </ul>
+        ) : (
+                <p class="empty">No upcoming events posted yet. Check the full calendar.</p>
+        )}
+
+        <a class="calendar-link" href="/calendar">View full calendar</a>
+    </div>
+</section>
+
+<style>
+    .outline {
+        border-bottom: 1px solid var(--gray-800);
+        padding-bottom: 5rem;
+        background-color: var(--gray-999_40);
+        box-shadow: var(--shadow-sm);
+        text-align: center;
+    }
+
+    .stack {
+        max-width: 60rem;
+        margin-inline: auto;
+        padding-inline: 1.5rem;
+    }
+
+    .events-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 1rem;
+    }
+
+    .event-item {
+        padding: 1rem 1.25rem;
+        border: 1px solid var(--gray-800);
+        border-radius: 0.75rem;
+        background: var(--gray-999_40);
+        text-align: left;
+    }
+
+    .event-title {
+        font-weight: 600;
+    }
+
+    .event-date {
+        margin-top: 0.25rem;
+        color: var(--gray-300);
+        font-size: 0.95rem;
+    }
+
+    .empty {
+        color: var(--gray-300);
+    }
+
+    .calendar-link {
+        display: inline-block;
+        margin-top: 1rem;
+        text-decoration: none;
+        padding: 0.75rem 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--gray-800);
+    }
+</style>
