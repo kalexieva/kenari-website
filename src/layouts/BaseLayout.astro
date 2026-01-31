@@ -34,7 +34,7 @@ const { title, description } = Astro.props;
 		<style>
 			:root {
 				--_placeholder-bg: linear-gradient(transparent, transparent);
-				--bg-image-main: url('/assets/backgrounds/bg-main-light.svg');
+				--bg-image-main: url('/assets/backgrounds/bg-main-light-6.svg');
 				--bg-image-main-curves: url('/assets/backgrounds/bg-main-overlay-light.svg');
 				--bg-image-subtle-1: var(--_placeholder-bg);
 				--bg-image-subtle-2: var(--_placeholder-bg);
@@ -42,13 +42,13 @@ const { title, description } = Astro.props;
 				--bg-svg-blend-mode: overlay;
 				--bg-blend-mode: darken;
 				--bg-image-aspect-ratio: 2.25;
-				--bg-scale: 1.68;
+				--bg-scale: 1.25;
 				--bg-aspect-ratio: calc(var(--bg-image-aspect-ratio) / var(--bg-scale));
 				--bg-gradient-size: calc(var(--bg-scale) * 100%);
 			}
 
 			:root.theme-dark {
-				--bg-image-main: url('/assets/backgrounds/bg-main-dark.svg');
+				--bg-image-main: url('/assets/backgrounds/bg-main-dark-6.svg');
 				--bg-image-main-curves: url('/assets/backgrounds/bg-main-overlay-dark.svg');
 				--bg-svg-blend-mode: darken;
 				--bg-blend-mode: lighten;
