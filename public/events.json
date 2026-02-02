@@ -42,10 +42,19 @@
       "excludeFromUpcoming": true
     },
     {
+      "title": "Practice",
+      "start": "2026-02-08T15:30:00-07:00",
+      "end": "2026-02-08T17:30:00-07:00",
+      "location": "Escalante Multi-Generational Center\n2150 E Orange St., Tempe, AZ 85281",
+      "locationUrl": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7",
+      "excludeFromUpcoming": true
+    },
+    {
       "title": "March 1st Picnic",
-      "start": "2026-03-01",
+      "start": "2026-03-01T09:00:00-07:00",
       "allDay": true,
-      "location": "Desert Breeze Park\n660 North Desert Breeze Blvd E, Chandler, AZ 85226"
+      "location": "Desert Breeze Park\n660 North Desert Breeze Blvd E, Chandler, AZ 85226",
+      "locationUrl": "https://maps.app.goo.gl/24vqbuAax2xA1WB36"
     }
   ]
 }

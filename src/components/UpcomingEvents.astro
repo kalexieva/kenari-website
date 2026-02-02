@@ -1,10 +1,13 @@
 ---
+import CallToAction from "./CallToAction.astro";
+import Icon from "./Icon.astro";
 type CalendarEvent = {
     title: string;
     start?: string;
     allDay?: boolean;
+    location?: string;
+    locationUrl?: string;
     excludeFromUpcoming?: boolean;
-    rrule?: unknown;
 };
 
 // Fetch the same JSON that the calendar uses (keeps one source of truth)
@@ -13,22 +16,23 @@ const data = (await res.json()) as { events: CalendarEvent[] };
 
 const now = new Date();
 
-// Only show events that have a `start` date, and date >= today
 const upcoming = (data.events ?? [])
+    // Don't show events where excludeFromUpcoming = true
     .filter((e) => !e.excludeFromUpcoming)
+    // Only show events that have a `start` date
     .filter((e) => typeof e.start === "string" && e.start.length > 0)
     .map((e) => ({ ...e, startDate: new Date(e.start!) }))
     .filter((e) => !Number.isNaN(e.startDate.getTime()))
+    // Only show events where start date >= now
     .filter((e) => e.startDate >= now)
     .sort((a, b) => a.startDate.getTime() - b.startDate.getTime())
+    // Only show the next 5 events
     .slice(0, 5);
 
 function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
     const datePart = new Intl.DateTimeFormat("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        year: "numeric",
+        dateStyle: "full",
+        timeZone: "America/Phoenix",
     }).format(e.startDate);
 
     if (e.allDay) return datePart;
@@ -50,8 +54,11 @@ function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
                 <ul class="events-list" aria-label="Upcoming events">
                     {upcoming.map((e) => (
                             <li class="event-item">
-                                <div class="event-title">{e.title}</div>
+                                <div class="event-title"><h5>{e.title}</h5></div>
                                 <div class="event-date">{formatEventDate(e)}</div>
+                                <div class="event-location">
+                                    <a href={e.locationUrl} target="_blank" rel="noopener noreferrer">{e.location}</a>
+                                </div>
                             </li>
                     ))}
                 </ul>
@@ -59,7 +66,10 @@ function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
                 <p class="empty">No upcoming events posted yet. Check the full calendar.</p>
         )}
 
-        <a class="calendar-link" href="/calendar">View full calendar</a>
+        <CallToAction href="/calendar">
+            View full calendar
+            <Icon icon="arrow-right" size="1.2em" />
+        </CallToAction>
     </div>
 </section>
 
@@ -94,26 +104,7 @@ function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
         text-align: left;
     }
 
-    .event-title {
-        font-weight: 600;
-    }
-
-    .event-date {
-        margin-top: 0.25rem;
-        color: var(--gray-300);
-        font-size: 0.95rem;
-    }
-
     .empty {
         color: var(--gray-300);
-    }
-
-    .calendar-link {
-        display: inline-block;
-        margin-top: 1rem;
-        text-decoration: none;
-        padding: 0.75rem 1rem;
-        border-radius: 999px;
-        border: 1px solid var(--gray-800);
     }
 </style>
