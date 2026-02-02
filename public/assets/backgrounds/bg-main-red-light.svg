@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+        width="1440.3159mm"
+        height="640.31592mm"
+        viewBox="0 0 1440 640.17547"
+        version="1.1"
+        id="svg1"
+        inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+        sodipodi:docname="bg-main-red-light.svg"
+        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+        xmlns="http://www.w3.org/2000/svg"
+>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.27874322"
+     inkscape:cx="2715.7611"
+     inkscape:cy="1121.1035"
+     inkscape:window-width="1920"
+     inkscape:window-height="1129"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath54">
+      <path
+         id="path54"
+         style="stroke-width:0.0999999;stroke-linecap:square;paint-order:markers fill stroke;stop-color:#000000"
+         d="m 1691.1994,-792.32001 h 1634.8919 v 92.82806 H 1691.1994 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath24">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.999999;stroke-linecap:butt;stroke-linejoin:bevel;paint-order:stroke markers fill;stop-color:#000000"
+         id="rect24"
+         width="44.999748"
+         height="77.937294"
+         x="251.53429"
+         y="222.73541" />
+    </clipPath>
+    <linearGradient
+       id="bottomFade"
+       x1="0"
+       y1="0"
+       x2="458.99078"
+       y2="517.11414"
+       gradientTransform="matrix(1.5000001,0,0,0.66666665,-2.8129517e-6,1.5333949e-5)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.30000001"
+         stop-color="#ffffff"
+         stop-opacity="0"
+         id="stop16"
+         style="stop-color:#d62612;stop-opacity:0.63609469;" />
+      <stop
+         offset="1"
+         stop-color="#ffffff"
+         stop-opacity="1"
+         id="stop17"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+    </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1"
+       inkscape:label="filter1"
+       inkscape:auto-region="false"
+       x="0"
+       y="0"
+       width="1000"
+       height="640">
+      <feGaussianBlur
+         stdDeviation="0"
+         id="feGaussianBlur15" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter90"
+       x="-0.42312333"
+       y="-0.079427244"
+       width="1.8462467"
+       height="1.1588545">
+      <feGaussianBlur
+         stdDeviation="33.4422 32.2154"
+         result="blur"
+         id="feGaussianBlur90" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter91"
+       x="-0.25489781"
+       y="-0.057018499"
+       width="1.5097956"
+       height="1.114037">
+      <feGaussianBlur
+         stdDeviation="33.4422 32.2154"
+         result="blur"
+         id="feGaussianBlur91" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Blur"
+       id="filter90-5"
+       x="-0.39272435"
+       y="-0.079427244"
+       width="1.7854487"
+       height="1.1588545">
+      <feGaussianBlur
+         stdDeviation="33.4422 32.2154"
+         result="blur"
+         id="feGaussianBlur90-5" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter23"
+       x="-0.055249762"
+       y="-1.3819264"
+       width="1.1104995"
+       height="3.7638528">
+      <feGaussianBlur
+         stdDeviation="33.4422 34.6691"
+         result="blur"
+         id="feGaussianBlur23" />
+    </filter>
+  </defs>
+  <rect
+     style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.315912;stroke-miterlimit:0"
+     id="background"
+     width="1440"
+     height="640"
+     x="0.15795626"
+     y="0.15795682"
+     sodipodi:insensitive="true" />
+  <rect
+     width="1440"
+     height="640"
+     fill="url(#bottomFade)"
+     id="fade"
+     x="0"
+     y="8.077613e-07"
+     style="display:inline;fill:url(#bottomFade);stroke-width:1" />
+</svg>
