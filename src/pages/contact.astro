@@ -17,20 +17,23 @@ import Hero from "../components/Hero.astro";
 					<input type="hidden" name="access_key" value="f8cee8db-3625-499a-b562-4d9ddb50f534">
                     <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
                     <input type="hidden" name="from_name" value="Kenari Website Form">
-					
+
 					<div class="field">
 						<input type="text" id="name" name="name" required placeholder=" ">
 						<label for="name">Name</label>
+						<span class="error-message" id="name-error">Please enter your name.</span>
 					</div>
 
 					<div class="field">
 						<input type="email" id="email" name="email" required placeholder=" ">
 						<label for="email">Email</label>
+						<span class="error-message" id="email-error">Please enter a valid email address.</span>
 					</div>
 
 					<div class="field">
 						<textarea id="message" name="message" required placeholder=" "></textarea>
 						<label for="message">Message</label>
+						<span class="error-message" id="message-error">Please enter a message.</span>
 					</div>
 
 					<button type="submit">
@@ -42,6 +45,28 @@ import Hero from "../components/Hero.astro";
 		</main>
 	</div>
 </BaseLayout>
+
+<script>
+	const form = document.querySelector('form');
+	const inputs = form?.querySelectorAll('input, textarea');
+
+	form?.addEventListener('submit', (event) => {
+		if (!form.checkValidity()) {
+			event.preventDefault();
+			inputs?.forEach((input) => {
+				const htmlInput = input as HTMLInputElement | HTMLTextAreaElement;
+				// Add a class to force validation styles even if not yet "touched"
+				htmlInput.classList.add('submitted');
+			});
+		}
+	});
+
+	inputs?.forEach((input) => {
+		input.addEventListener('blur', () => {
+			(input as HTMLElement).classList.add('touched');
+		});
+	});
+</script>
 
 <style>
 	.hero {
@@ -121,6 +146,35 @@ import Hero from "../components/Hero.astro";
 	textarea:focus {
 		outline: none;
 		border-color: var(--accent-regular);
+	}
+
+	/* Validation Styles */
+	input.touched:invalid,
+	textarea.touched:invalid,
+	input.submitted:invalid,
+	textarea.submitted:invalid {
+		border-color: #ff6b6b;
+	}
+
+	input.touched:invalid ~ label,
+	textarea.touched:invalid ~ label,
+	input.submitted:invalid ~ label,
+	textarea.submitted:invalid ~ label {
+		color: #ff6b6b;
+	}
+
+	.error-message {
+		font-size: var(--text-sm);
+		color: #ff6b6b;
+		margin-top: 0.25rem;
+		display: none;
+	}
+
+	input.touched:invalid ~ .error-message,
+	textarea.touched:invalid ~ .error-message,
+	input.submitted:invalid ~ .error-message,
+	textarea.submitted:invalid ~ .error-message {
+		display: block;
 	}
 
 	textarea {
