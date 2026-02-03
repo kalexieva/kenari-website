@@ -19,18 +19,18 @@ import Hero from "../components/Hero.astro";
                     <input type="hidden" name="from_name" value="Kenari Website Form">
 					
 					<div class="field">
+						<input type="text" id="name" name="name" required placeholder=" ">
 						<label for="name">Name</label>
-						<input type="text" id="name" name="name" required placeholder="Your Name">
 					</div>
 
 					<div class="field">
+						<input type="email" id="email" name="email" required placeholder=" ">
 						<label for="email">Email</label>
-						<input type="email" id="email" name="email" required placeholder="your.email@example.com">
 					</div>
 
 					<div class="field">
+						<textarea id="message" name="message" required placeholder=" "></textarea>
 						<label for="message">Message</label>
-						<textarea id="message" name="message" required placeholder="How can we help?"></textarea>
 					</div>
 
 					<button type="submit">
@@ -78,6 +78,7 @@ import Hero from "../components/Hero.astro";
 	}
 
 	.field {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
@@ -85,14 +86,20 @@ import Hero from "../components/Hero.astro";
 	}
 
 	label {
+		position: absolute;
+		left: 1rem;
+		top: 0.75rem;
 		font-weight: 600;
-		color: var(--gray-200);
+		color: var(--gray-400);
+		pointer-events: none;
+		transition: transform var(--theme-transition), font-size var(--theme-transition), color var(--theme-transition);
+		transform-origin: left top;
 	}
 
 	input,
 	textarea {
 		width: 100%;
-		padding: 0.75rem 1rem;
+		padding: 1.5rem 1rem 0.5rem;
 		border: 1px solid var(--gray-800);
 		border-radius: 0.5rem;
 		background-color: var(--gray-999);
@@ -100,6 +107,14 @@ import Hero from "../components/Hero.astro";
 		font-family: var(--font-body);
 		font-size: var(--text-base);
 		transition: border-color var(--theme-transition);
+	}
+
+	input:focus ~ label,
+	input:not(:placeholder-shown) ~ label,
+	textarea:focus ~ label,
+	textarea:not(:placeholder-shown) ~ label {
+		transform: translateY(-0.75rem) scale(0.8);
+		color: var(--accent-regular);
 	}
 
 	input:focus,
