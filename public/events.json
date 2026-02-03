@@ -2,10 +2,13 @@
   "events": [
     {
       "title": "Practice",
-      "location": "Escalante Multi-Generational Center\n2150 E Orange St., Tempe, AZ 85281",
-      "locationUrl": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7",
       "duration": "02:00",
       "excludeFromUpcoming": true,
+      "location": {
+        "name": "Escalante Multi-Generational Center",
+        "address": "2150 E Orange St., Tempe, AZ 85281",
+        "url": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7"
+      },
       "rrule": {
         "freq": "weekly",
         "byweekday": [ "th" ],
@@ -22,39 +25,54 @@
     {
       "title": "Chandler Multicultural Festival",
       "start": "2026-01-17T12:30:00-07:00",
-      "location": "Dr. A.J. Chandler Park: Stage Plaza\n178 E. Commonwealth Ave., Chandler, AZ 85225",
-      "locationUrl": "https://www.chandleraz.gov/events/chandler-multicultural-festival"
+      "location": {
+        "name": "Dr. A.J. Chandler Park: Stage Plaza",
+        "address": "178 E. Commonwealth Ave., Chandler, AZ 85225",
+        "url": "https://www.chandleraz.gov/events/chandler-multicultural-festival"
+      }
     },
     {
       "title": "Professor Anton Lesson",
       "start": "2026-01-26T18:30:00-07:00",
       "end": "2026-01-26T20:30:00-07:00",
-      "location": "Escalante Multi-Generational Center\n2150 E Orange St., Tempe, AZ 85281",
-      "locationUrl": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7",
-      "excludeFromUpcoming": true
+      "excludeFromUpcoming": true,
+      "location": {
+        "name": "Escalante Multi-Generational Center",
+        "address": "2150 E Orange St., Tempe, AZ 85281",
+        "url": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7"
+      }
     },
     {
       "title": "Professor Anton Lesson",
       "start": "2026-01-27T18:30:00-07:00",
       "end": "2026-01-27T20:30:00-07:00",
-      "location": "Escalante Multi-Generational Center\n2150 E Orange St., Tempe, AZ 85281",
-      "locationUrl": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7",
-      "excludeFromUpcoming": true
+      "excludeFromUpcoming": true,
+      "location": {
+        "name": "Escalante Multi-Generational Center",
+        "address": "2150 E Orange St., Tempe, AZ 85281",
+        "url": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7"
+      }
     },
     {
       "title": "Practice",
       "start": "2026-02-08T15:30:00-07:00",
       "end": "2026-02-08T17:30:00-07:00",
-      "location": "Escalante Multi-Generational Center\n2150 E Orange St., Tempe, AZ 85281",
-      "locationUrl": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7",
-      "excludeFromUpcoming": true
+      "excludeFromUpcoming": true,
+      "location": {
+        "name": "Escalante Multi-Generational Center",
+        "address": "2150 E Orange St., Tempe, AZ 85281",
+        "url": "https://maps.app.goo.gl/XSJthEpUX5UNLvwD7"
+      }
     },
     {
       "title": "March 1st Picnic",
       "start": "2026-03-01T09:00:00-07:00",
       "allDay": true,
-      "location": "Desert Breeze Park\n660 North Desert Breeze Blvd E, Chandler, AZ 85226",
-      "locationUrl": "https://maps.app.goo.gl/24vqbuAax2xA1WB36"
+      "location": {
+        "name": "Desert Breeze Park",
+        "address": "660 North Desert Breeze Blvd E, Chandler, AZ 85226",
+        "url": "https://maps.app.goo.gl/24vqbuAax2xA1WB36"
+      }
     }
   ]
 }

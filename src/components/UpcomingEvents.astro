@@ -5,10 +5,15 @@ type CalendarEvent = {
     title: string;
     start?: string;
     allDay?: boolean;
-    location?: string;
-    locationUrl?: string;
     excludeFromUpcoming?: boolean;
+    location: Location;
 };
+
+type Location = {
+    name: string;
+    address: string;
+    url: string;
+}
 
 // Fetch the same JSON that the calendar uses (keeps one source of truth)
 const res = await fetch(new URL("/events.json", Astro.url));
@@ -29,18 +34,18 @@ const upcoming = (data.events ?? [])
     // Only show the next 5 events
     .slice(0, 5);
 
-function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
+function formatEventDate(event: { startDate: Date; allDay?: boolean }) {
     const datePart = new Intl.DateTimeFormat("en-US", {
         dateStyle: "full",
         timeZone: "America/Phoenix",
-    }).format(e.startDate);
+    }).format(event.startDate);
 
-    if (e.allDay) return datePart;
+    if (event.allDay) return datePart;
 
     const timePart = new Intl.DateTimeFormat("en-US", {
         hour: "numeric",
         minute: "2-digit",
-    }).format(e.startDate);
+    }).format(event.startDate);
 
     return `${datePart} • ${timePart}`;
 }
@@ -51,13 +56,14 @@ function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
         <h2>Upcoming Events</h2>
 
         {upcoming.length > 0 ? (
-                <ul class="events-list" aria-label="Upcoming events">
-                    {upcoming.map((e) => (
+                <ul class="events-list gap-4" aria-label="Upcoming events">
+                    {upcoming.map((event) => (
                             <li class="event-item">
-                                <div class="event-title"><h5>{e.title}</h5></div>
-                                <div class="event-date">{formatEventDate(e)}</div>
-                                <div class="event-location">
-                                    <a href={e.locationUrl} target="_blank" rel="noopener noreferrer">{e.location}</a>
+                                <div><h5>{event.title}</h5></div>
+                                <div>{formatEventDate(event)}</div>
+                                <div>{event.location.name}</div>
+                                <div>
+                                    <a href={event.location.url} target="_blank" rel="noopener noreferrer">{event.location.address}</a>
                                 </div>
                             </li>
                     ))}
@@ -66,10 +72,12 @@ function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
                 <p class="empty">No upcoming events posted yet. Check the full calendar.</p>
         )}
 
-        <CallToAction href="/calendar">
-            View full calendar
-            <Icon icon="arrow-right" size="1.2em" />
-        </CallToAction>
+        <div class="calendar-button">
+            <CallToAction href="/calendar">
+                View Full Calendar
+                <Icon icon="arrow-right" size="1.2em" />
+            </CallToAction>
+        </div>
     </div>
 </section>
 
@@ -82,29 +90,27 @@ function formatEventDate(e: { startDate: Date; allDay?: boolean }) {
         text-align: center;
     }
 
-    .stack {
-        max-width: 60rem;
-        margin-inline: auto;
-        padding-inline: 1.5rem;
-    }
-
     .events-list {
         list-style: none;
         padding: 0;
         margin: 0;
         display: grid;
-        gap: 1rem;
+        margin-inline: auto;
     }
 
     .event-item {
         padding: 1rem 1.25rem;
         border: 1px solid var(--gray-800);
         border-radius: 0.75rem;
-        background: var(--gray-999_40);
+        background: var(--gray-900);
         text-align: left;
     }
 
     .empty {
         color: var(--gray-300);
+    }
+
+    .calendar-button {
+        margin-inline: auto;
     }
 </style>
