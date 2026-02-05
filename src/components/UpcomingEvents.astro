@@ -36,15 +36,14 @@ const upcoming = (data.events ?? [])
 
 function formatEventDate(event: { startDate: Date; allDay?: boolean }) {
     const datePart = new Intl.DateTimeFormat("en-US", {
-        dateStyle: "full",
+        dateStyle: "medium",
         timeZone: "America/Phoenix",
     }).format(event.startDate);
 
     if (event.allDay) return datePart;
 
     const timePart = new Intl.DateTimeFormat("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
+        timeStyle: "short"
     }).format(event.startDate);
 
     return `${datePart} • ${timePart}`;
@@ -59,23 +58,23 @@ function formatEventDate(event: { startDate: Date; allDay?: boolean }) {
                 <ul class="events-list gap-4" aria-label="Upcoming events">
                     {upcoming.map((event) => (
                             <li class="event-item">
-                                <div><h5>{event.title}</h5></div>
-                                <div>{formatEventDate(event)}</div>
-                                <div>{event.location.name}</div>
+                                <p class="event-text"><strong>{formatEventDate(event)}</strong></p>
+                                <p class="event-text">{event.title}</p>
                                 <div>
-                                    <a href={event.location.url} target="_blank" rel="noopener noreferrer">{event.location.address}</a>
+                                    <p><strong>{event.location.name}</strong></p>
+                                    <p><a href={event.location.url} target="_blank" rel="noopener noreferrer">{event.location.address}</a></p>
                                 </div>
                             </li>
                     ))}
                 </ul>
         ) : (
-                <p class="empty">No upcoming events posted yet. Check the full calendar.</p>
+                <p class="empty">No upcoming events posted yet. Check the calendar for all events.</p>
         )}
 
         <div class="calendar-button">
             <CallToAction href="/calendar">
-                View Full Calendar
-                <Icon icon="arrow-right" size="1.2em" />
+                View Calendar
+                <Icon icon="calendar-dots" size="1.2em" />
             </CallToAction>
         </div>
     </div>
@@ -92,8 +91,8 @@ function formatEventDate(event: { startDate: Date; allDay?: boolean }) {
 
     .events-list {
         list-style: none;
-        padding: 0;
-        margin: 0;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
         display: grid;
         margin-inline: auto;
     }
@@ -106,11 +105,37 @@ function formatEventDate(event: { startDate: Date; allDay?: boolean }) {
         text-align: left;
     }
 
+    .event-text {
+        font-size: var(--text-md);
+        margin-bottom: 0.5rem;
+    }
+
     .empty {
         color: var(--gray-300);
     }
 
     .calendar-button {
         margin-inline: auto;
+    }
+
+    @media (min-width: 50em) {
+        .events-list {
+            padding-left: 0;
+            padding-right: 0;
+            max-width: 50rem;
+        }
+
+        .event-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .event-text {
+            font-size: var(--text-lg);
+            align-self: center;
+            justify-self: start;
+            margin-bottom: 0;
+        }
     }
 </style>
