@@ -19,6 +19,21 @@ const projects = (await getCollection('past-events'))
 	.sort((a, b) => b.data.eventDate.valueOf() - a.data.eventDate.valueOf())
 	.slice(0, 4);
 
+// Auto-pick a thumbnail from src/assets/past-events/<slug>/*
+const allEventImages = import.meta.glob<{ default: ImageMetadata }>(
+	"../assets/past-events/**/*.{jpg,jpeg,png,webp,avif}",
+	{ eager: true }
+);
+
+const getThumbForSlug = (slug: string): ImageMetadata | undefined => {
+	const images = Object.entries(allEventImages)
+		.filter(([filePath]) => filePath.includes(`/past-events/${slug}/`))
+		.sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+		.map(([, mod]) => mod.default);
+
+	return images[0];
+};
+
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
@@ -55,7 +70,7 @@ const projects = (await getCollection('past-events'))
 						{
 							projects.map((project) => (
 								<li>
-									<EventsPreview project={project} />
+									<EventsPreview project={project} thumb={getThumbForSlug(project.id)} />
 								</li>
 							))
 						}
