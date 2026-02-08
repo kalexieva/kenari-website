@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import pswpInitUrl from "../scripts/PhotoSwipeInitialization.ts?url";
 
 interface Props {
     images: ImageMetadata[];
@@ -23,7 +24,7 @@ const galleryId =
     id ? `pswp-${id}` : `pswp-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 ---
 
-<div class="pswp-gallery gallery-grid" id={galleryId}>
+<div class="pswp-gallery gallery-grid" id={galleryId} data-pswp-gallery>
     {
         images.map((img) => (
                 <a
@@ -46,25 +47,7 @@ const galleryId =
     }
 </div>
 
-<script type="module" define:vars={{ galleryId }}>
-    import PhotoSwipeLightbox from "photoswipe/lightbox";
-    import "photoswipe/style.css";
-
-    const selector = `#${galleryId}`;
-    const root = document.querySelector(selector);
-
-    if (root) {
-        const lightbox = new PhotoSwipeLightbox({
-            gallery: selector,
-            children: "a",
-            pswpModule: () => import("photoswipe"),
-        });
-
-        lightbox.init();
-
-        addEventListener("astro:before-swap", () => lightbox.destroy(), { once: true });
-    }
-</script>
+<script type="module" src={pswpInitUrl}></script>
 
 <style>
     .gallery-grid {
@@ -97,7 +80,7 @@ const galleryId =
         }
 
         .thumb {
-            border-radius: 1.5rem;
+            border-radius: 1rem;
         }
     }
 </style>
