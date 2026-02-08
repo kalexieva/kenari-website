@@ -9,9 +9,6 @@ export const collections = {
 			title: z.string(),
 			description: z.string(),
 			eventDate: z.coerce.date(),
-			img: z.string(),
-			img_alt: z.string().optional(),
-			gallery: z.array(z.string()).optional(),
 		}),
 	}),
 };

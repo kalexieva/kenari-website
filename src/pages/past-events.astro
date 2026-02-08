@@ -5,8 +5,9 @@ import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import EventsPreview from '../components/EventsPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getThumbForSlug } from '../utils/photos-utils.ts';
 
-const projects = (await getCollection('past-events')).sort(
+const events = (await getCollection('past-events')).sort(
 	(a, b) => b.data.eventDate.valueOf() - a.data.eventDate.valueOf(),
 );
 ---
@@ -24,9 +25,9 @@ const projects = (await getCollection('past-events')).sort(
 			/>
 			<Grid variant="offset">
 				{
-					projects.map((project) => (
+					events.map((project) => (
 						<li>
-							<EventsPreview project={project} />
+							<EventsPreview project={project} thumb={getThumbForSlug(project.id)} />
 						</li>
 					))
 				}

@@ -1,38 +1,23 @@
 ---
 import { getCollection } from 'astro:content';
+import { getThumbForSlug } from '../utils/photos-utils.ts';
 // Component Imports
 import CallToAction from '../components/CallToAction.astro';
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
 import Grid from '../components/Grid.astro';
-import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import EventsPreview from '../components/EventsPreview.astro';
 import PracticeInfo from '../components/PracticeInfo.astro';
 import About from "../components/About.astro";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import UpcomingEvents from "../components/UpcomingEvents.astro";
+import UpcomingEvents from '../components/UpcomingEvents.astro';
 
 // Content Fetching: List four most recent events
-const projects = (await getCollection('past-events'))
+const events = (await getCollection('past-events'))
 	.sort((a, b) => b.data.eventDate.valueOf() - a.data.eventDate.valueOf())
 	.slice(0, 4);
-
-// Auto-pick a thumbnail from src/assets/past-events/<slug>/*
-const allEventImages = import.meta.glob<{ default: ImageMetadata }>(
-	"../assets/past-events/**/*.{jpg,jpeg,png,webp,avif}",
-	{ eager: true }
-);
-
-const getThumbForSlug = (slug: string): ImageMetadata | undefined => {
-	const images = Object.entries(allEventImages)
-		.filter(([filePath]) => filePath.includes(`/past-events/${slug}/`))
-		.sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-		.map(([, mod]) => mod.default);
-
-	return images[0];
-};
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
@@ -68,7 +53,7 @@ const getThumbForSlug = (slug: string): ImageMetadata | undefined => {
 				<div class="gallery">
 					<Grid variant="offset">
 						{
-							projects.map((project) => (
+							events.map((project) => (
 								<li>
 									<EventsPreview project={project} thumb={getThumbForSlug(project.id)} />
 								</li>
