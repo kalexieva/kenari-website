@@ -11,7 +11,9 @@
       },
       "rrule": {
         "freq": "weekly",
-        "byweekday": [ "th" ],
+        "byweekday": [
+          "th"
+        ],
         "dtstart": "2026-01-08T18:30:00",
         "until": "2027-01-01"
       },
@@ -72,6 +74,16 @@
         "name": "Desert Breeze Park",
         "address": "660 North Desert Breeze Blvd E, Chandler, AZ 85226",
         "url": "https://maps.app.goo.gl/24vqbuAax2xA1WB36"
+      }
+    },
+    {
+      "title": "Gilbert Global Village Festival",
+      "start": "2026-04-11T09:00:00-07:00",
+      "end": "2026-04-11T14:00:00-07:00",
+      "location": {
+        "name": "Gilbert Civic Center Lawn",
+        "address": "50 E Civic Center Dr, Gilbert, AZ 85296",
+        "url": "https://www.gilbertaz.gov/departments/parks-and-recreation/special-events-and-permits/gilbert-global-village-festival"
       }
     }
   ]

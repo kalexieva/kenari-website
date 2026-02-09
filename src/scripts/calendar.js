@@ -115,13 +115,8 @@ function buildCalendar(isMobile) {
 
 		eventDidMount: function (info) {
 			if (info.event.start) {
-				// Add a tooltip with full title and location
-				const location = info.event.extendedProps.location;
-				let tooltipText = info.event.title;
-				if (location) {
-					tooltipText += ` (${location})`;
-				}
-				info.el.setAttribute('title', tooltipText);
+				// Add a tooltip with full title
+				info.el.setAttribute('title', info.event.title);
 			}
 		}
 	});
