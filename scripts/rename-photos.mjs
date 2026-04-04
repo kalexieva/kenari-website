@@ -12,7 +12,7 @@ const slug = process.argv[2]; // optional
 const targetDir = slug ? path.join(ROOT, slug) : ROOT;
 
 // Extensions you consider "photos" (add/remove as you like)
-const exts = ["jpg", "jpeg", "png", "webp", "avif"];
+const exts = ["jpg", "jpeg", "png", "webp", "avif", "JPG", "JPEG", "PNG", "WEBP", "AVIF"];
 
 const patterns = slug
     ? exts.map((e) => `${slug}/**/*.${e}`)
