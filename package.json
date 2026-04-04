@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "convert:heic": "node scripts/convert-heic.mjs",
-    "rename:photos": "node scripts/rename-photos.mjs"
+    "rename:photos": "node scripts/rename-photos.mjs",
+    "format": "prettier --write ."
   },
   "keywords": [
     "dance"
@@ -31,6 +32,7 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "prettier": "^3.8.1",
     "rimraf": "^6.1.3"
   }
 }

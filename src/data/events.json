@@ -11,9 +11,7 @@
       },
       "rrule": {
         "freq": "weekly",
-        "byweekday": [
-          "th"
-        ],
+        "byweekday": ["th"],
         "dtstart": "2026-01-08T18:30:00",
         "until": "2027-01-01"
       },
