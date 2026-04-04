@@ -17,8 +17,22 @@
   "keywords": [
     "dance"
   ],
-  "author": "Kalina Alexieva",
+  "author": {
+    "name": "Kalina Alexieva",
+    "email": "kalexieva1@gmail.com"
+  },
   "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalexieva/kenari-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kalexieva/kenari-website/issues"
+  },
+  "homepage": "https://kenaridancers.com",
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
     "@fullcalendar/core": "^6.1.20",
