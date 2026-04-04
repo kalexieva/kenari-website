@@ -1,6 +1,8 @@
 ---
 import CallToAction from "./CallToAction.astro";
 import Icon from "./Icon.astro";
+import eventsData from "../data/events.json";
+
 type CalendarEvent = {
     title: string;
     start?: string;
@@ -15,9 +17,7 @@ type Location = {
     url: string;
 }
 
-// Fetch the same JSON that the calendar uses (keeps one source of truth)
-const res = await fetch(new URL("/events.json", Astro.url));
-const data = (await res.json()) as { events: CalendarEvent[] };
+const data = eventsData as { events: CalendarEvent[] };
 
 const now = new Date();
 
