@@ -13,6 +13,7 @@
     "convert:heic": "node scripts/convert-heic.mjs",
     "rename:photos": "node scripts/rename-photos.mjs",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint ."
   },
   "keywords": [
