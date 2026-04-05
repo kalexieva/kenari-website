@@ -1,5 +1,8 @@
+import eslintPluginAstro from "eslint-plugin-astro";
+
 export default [
   {
-    ignores: ["dist/", "node_modules/", ".astro/"],
+    ignores: ["dist/**", "node_modules/**"],
   },
+  ...eslintPluginAstro.configs.recommended,
 ];
