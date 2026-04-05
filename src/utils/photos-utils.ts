@@ -1,4 +1,4 @@
-import type {ImageMetadata} from "astro";
+import type { ImageMetadata } from "astro";
 
 // Important: this path is relative to *this file* (src/utils/...)
 // Photos are expected at: src/assets/past-events/<slug>/*

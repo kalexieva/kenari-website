@@ -1,4 +1,4 @@
-import type {APIContext} from "astro";
+import type { APIContext } from "astro";
 import eventsData from "../data/events.json";
 
 // This route exists so the same event data can be used in two places:
