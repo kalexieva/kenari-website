@@ -11,6 +11,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Reject HEIC/HEIF files
+        run: |
+          if find . -type f \( -iname '*.heic' -o -iname '*.heif' \) | grep -q .; then
+            echo "Error: HEIC/HEIF files are not supported on our website. They must be converted to JPG files. Run 'npm run convert:heic' to automatically convert the images."
+            find . -type f \( -iname '*.heic' -o -iname '*.heif' \)
+            exit 1
+          fi
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
