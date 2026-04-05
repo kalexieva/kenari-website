@@ -1,220 +1,229 @@
 ---
-import Hero from '../components/Hero.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from "../components/Hero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Calendar | Kenari" description="Calendar of practices and events.">
-	<div class="stack gap-20">
-		<main class="wrapper calendar">
-			<Hero
-				title="Calendar"
-				tagline="See our calendar for upcoming practices, performances and events."
-			/>
+<BaseLayout
+  title="Calendar | Kenari"
+  description="Calendar of practices and events."
+>
+  <div class="stack gap-20">
+    <main class="wrapper calendar">
+      <Hero
+        title="Calendar"
+        tagline="See our calendar for upcoming practices, performances and events."
+      />
 
-			<section>
-				<div id="calendar"></div>
-			</section>
+      <section>
+        <div id="calendar"></div>
+      </section>
 
-			<!-- Event Details Popover -->
-			<div id="event-details-popover" class="popover-hidden">
-				<header>
-					<h2 id="popover-title"></h2>
-					<button id="close-popover" aria-label="close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</header>
-				<article>
-					<div class="popover-info">
-						<strong>Time:</strong> <span id="popover-time"></span>
-					</div>
-					<div class="popover-info">
-						<strong>Location:</strong>
-						<p id="popover-location"></p>
-						<a id="popover-location-link" href="" target="_blank" rel="noopener noreferrer">
-							<p id="popover-address"></p>
-						</a>
-					</div>
-				</article>
-			</div>
-		</main>
-	</div>
+      <!-- Event Details Popover -->
+      <div id="event-details-popover" class="popover-hidden">
+        <header>
+          <h2 id="popover-title"></h2>
+          <button id="close-popover" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </header>
+        <article>
+          <div class="popover-info">
+            <strong>Time:</strong>
+            <span id="popover-time"></span>
+          </div>
+          <div class="popover-info">
+            <strong>Location:</strong>
+            <p id="popover-location"></p>
+            <a
+              id="popover-location-link"
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p id="popover-address"></p>
+            </a>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
 </BaseLayout>
 
 <script src="../scripts/calendar.js"></script>
 
 <style>
-	.calendar {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
+  .calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
 
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+  img {
+    margin-top: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
 
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		color: var(--gray-200);
-	}
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--gray-200);
+  }
 
-	#calendar {
-		width: 100%;
-		background-color: var(--gray-999);
-		padding: 1rem;
-		border-radius: 0.75rem;
-		border: 1px solid var(--fc-border-color, var(--gray-800));
-		box-shadow: var(--shadow-sm);
-		font-size: 0.85rem;
-		--fc-button-active-bg-color: var(--accent-dark);
-		--fc-button-active-border-color: var(--accent-dark);
-		--fc-border-color: var(--gray-800);
-		--fc-button-bg-color: var(--accent-regular);
-		--fc-button-border-color: var(--accent-regular);
-		--fc-button-hover-bg-color: var(--accent-dark);
-		--fc-button-hover-border-color: var(--accent-dark);
-	}
+  #calendar {
+    width: 100%;
+    background-color: var(--gray-999);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--fc-border-color, var(--gray-800));
+    box-shadow: var(--shadow-sm);
+    font-size: 0.85rem;
+    --fc-button-active-bg-color: var(--accent-dark);
+    --fc-button-active-border-color: var(--accent-dark);
+    --fc-border-color: var(--gray-800);
+    --fc-button-bg-color: var(--accent-regular);
+    --fc-button-border-color: var(--accent-regular);
+    --fc-button-hover-bg-color: var(--accent-dark);
+    --fc-button-hover-border-color: var(--accent-dark);
+  }
 
-	#calendar :global(.fc-event) {
-		cursor: pointer;
-	}
+  #calendar :global(.fc-event) {
+    cursor: pointer;
+  }
 
-	/* Fix readability in dark mode and general colors */
-	#calendar :global(.fc-list-day-cushion) {
-		background-color: var(--fc-neutral-bg-color, var(--gray-800));
-	}
+  /* Fix readability in dark mode and general colors */
+  #calendar :global(.fc-list-day-cushion) {
+    background-color: var(--fc-neutral-bg-color, var(--gray-800));
+  }
 
-	#calendar :global(.fc-list-day-text),
-	#calendar :global(.fc-list-day-side-text) {
-		color: var(--gray-0);
-	}
+  #calendar :global(.fc-list-day-text),
+  #calendar :global(.fc-list-day-side-text) {
+    color: var(--gray-0);
+  }
 
-	#calendar :global(.fc-list-event:hover td) {
-		background-color: var(--fc-list-event-hover-bg-color, var(--gray-800));
-	}
+  #calendar :global(.fc-list-event:hover td) {
+    background-color: var(--fc-list-event-hover-bg-color, var(--gray-800));
+  }
 
-	#calendar :global(a) {
-		color: var(--gray-0);
-	}
+  #calendar :global(a) {
+    color: var(--gray-0);
+  }
 
-	#calendar :global(.fc-col-header-cell-cushion),
-	#calendar :global(.fc-daygrid-day-number),
-	#calendar :global(.fc-daygrid-event) {
-		color: var(--gray-0);
-	}
+  #calendar :global(.fc-col-header-cell-cushion),
+  #calendar :global(.fc-daygrid-day-number),
+  #calendar :global(.fc-daygrid-event) {
+    color: var(--gray-0);
+  }
 
-	:global(.theme-dark) #calendar {
-		--fc-border-color: var(--gray-700);
-		--fc-list-event-hover-bg-color: var(--gray-900);
-		--fc-page-bg-color: var(--gray-999);
-		--fc-neutral-bg-color: var(--gray-800);
-		--fc-button-active-bg-color: var(--accent-light);
-		--fc-button-active-border-color: var(--accent-light);
-	}
+  :global(.theme-dark) #calendar {
+    --fc-border-color: var(--gray-700);
+    --fc-list-event-hover-bg-color: var(--gray-900);
+    --fc-page-bg-color: var(--gray-999);
+    --fc-neutral-bg-color: var(--gray-800);
+    --fc-button-active-bg-color: var(--accent-light);
+    --fc-button-active-border-color: var(--accent-light);
+  }
 
-	/* Popover Styles */
-	#event-details-popover {
-		position: absolute;
-		z-index: 1000;
-		background-color: var(--gray-900);
-		color: var(--gray-200);
-		border: 1px solid var(--gray-800);
-		border-radius: 0.75rem;
-		padding: 0;
-		width: 90%;
-		max-width: 350px;
-		box-shadow: var(--shadow-sm);
-		display: flex;
-		flex-direction: column;
-	}
+  /* Popover Styles */
+  #event-details-popover {
+    position: absolute;
+    z-index: 1000;
+    background-color: var(--gray-900);
+    color: var(--gray-200);
+    border: 1px solid var(--gray-800);
+    border-radius: 0.75rem;
+    padding: 0;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+  }
 
-	.popover-hidden {
-		display: none !important;
-	}
+  .popover-hidden {
+    display: none !important;
+  }
 
-	#event-details-popover header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0.75rem 1rem;
-		border-bottom: 1px solid var(--gray-800);
-		background-color: var(--gray-999);
-		border-radius: 0.75rem 0.75rem 0 0;
-	}
+  #event-details-popover header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--gray-800);
+    background-color: var(--gray-999);
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
 
-	#event-details-popover h2 {
-		font-size: var(--text-md);
-		color: var(--gray-0);
-		margin: 0;
-	}
+  #event-details-popover h2 {
+    font-size: var(--text-md);
+    color: var(--gray-0);
+    margin: 0;
+  }
 
-	#event-details-popover header button {
-		background: transparent;
-		border: none;
-		color: var(--gray-400);
-		font-size: 1.25rem;
-		cursor: pointer;
-		line-height: 1;
-	}
+  #event-details-popover header button {
+    background: transparent;
+    border: none;
+    color: var(--gray-400);
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1;
+  }
 
-	#event-details-popover header button:hover {
-		color: var(--gray-0);
-	}
+  #event-details-popover header button:hover {
+    color: var(--gray-0);
+  }
 
-	#event-details-popover article {
-		padding: 1rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		font-size: var(--text-sm);
-	}
+  #event-details-popover article {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+  }
 
-	.popover-info strong {
-		color: var(--gray-0);
-	}
+  .popover-info strong {
+    color: var(--gray-0);
+  }
 
-	.section-title {
-		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
+  .section-title {
+    grid-column-start: 1;
+    font-size: var(--text-xl);
+    color: var(--gray-0);
+  }
 
-	.content {
-		grid-column: 2 / 4;
-	}
+  .content {
+    grid-column: 2 / 4;
+  }
 
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
+  .content :global(a) {
+    text-decoration: 1px solid underline transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--theme-transition);
+  }
 
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
+  .content :global(a:hover),
+  .content :global(a:focus) {
+    text-decoration-color: currentColor;
+  }
 
-	@media (min-width: 50em) {
-		.calendar {
-			display: grid;
-			grid-template-columns: 1fr 80% 1fr;
-		}
+  @media (min-width: 50em) {
+    .calendar {
+      display: grid;
+      grid-template-columns: 1fr 80% 1fr;
+    }
 
-		.calendar > :global(:first-child) {
-			grid-column-start: 2;
-		}
+    .calendar > :global(:first-child) {
+      grid-column-start: 2;
+    }
 
-		#calendar {
-			grid-column: 2 / 3;
-			min-height: 600px;
-		}
+    #calendar {
+      grid-column: 2 / 3;
+      min-height: 600px;
+    }
 
-		section {
-			display: contents;
-		}
-	}
+    section {
+      display: contents;
+    }
+  }
 </style>

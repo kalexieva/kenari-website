@@ -1,38 +1,41 @@
 ---
-import { getCollection } from 'astro:content';
-import ContactCTA from '../components/ContactCTA.astro';
-import Grid from '../components/Grid.astro';
-import Hero from '../components/Hero.astro';
-import EventsPreview from '../components/EventsPreview.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getThumbForSlug } from '../utils/photos-utils.ts';
+import { getCollection } from "astro:content";
+import ContactCTA from "../components/ContactCTA.astro";
+import Grid from "../components/Grid.astro";
+import Hero from "../components/Hero.astro";
+import EventsPreview from "../components/EventsPreview.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getThumbForSlug } from "../utils/photos-utils.ts";
 
-const events = (await getCollection('past-events')).sort(
-	(a, b) => b.data.eventDate.valueOf() - a.data.eventDate.valueOf(),
+const events = (await getCollection("past-events")).sort(
+  (a, b) => b.data.eventDate.valueOf() - a.data.eventDate.valueOf(),
 );
 ---
 
 <BaseLayout
-	title="Past Events | Kenari"
-	description="See pictures from our past performances and events"
+  title="Past Events | Kenari"
+  description="See pictures from our past performances and events"
 >
-	<div class="stack gap-20">
-		<main class="wrapper stack gap-8">
-			<Hero
-				title="Past Events"
-				tagline="See our past performances below."
-				align="start"
-			/>
-			<Grid variant="offset">
-				{
-					events.map((project) => (
-						<li>
-							<EventsPreview project={project} thumb={getThumbForSlug(project.id)} />
-						</li>
-					))
-				}
-			</Grid>
-		</main>
-		<ContactCTA />
-	</div>
+  <div class="stack gap-20">
+    <main class="wrapper stack gap-8">
+      <Hero
+        title="Past Events"
+        tagline="See our past performances below."
+        align="start"
+      />
+      <Grid variant="offset">
+        {
+          events.map((project) => (
+            <li>
+              <EventsPreview
+                project={project}
+                thumb={getThumbForSlug(project.id)}
+              />
+            </li>
+          ))
+        }
+      </Grid>
+    </main>
+    <ContactCTA />
+  </div>
 </BaseLayout>

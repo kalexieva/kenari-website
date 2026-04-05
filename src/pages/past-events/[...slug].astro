@@ -1,23 +1,23 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from "astro:content";
 import type { ImageMetadata } from "astro";
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ContactCTA from '../../components/ContactCTA.astro';
-import Hero from '../../components/Hero.astro';
-import Icon from '../../components/Icon.astro';
-import PhotoSwipeGallery from '../../components/PhotoSwipeGallery.astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Hero from "../../components/Hero.astro";
+import Icon from "../../components/Icon.astro";
+import PhotoSwipeGallery from "../../components/PhotoSwipeGallery.astro";
 
 interface Props {
-	entry: CollectionEntry<'past-events'>;
+  entry: CollectionEntry<"past-events">;
 }
 
 export async function getStaticPaths() {
-	const pastEvents = await getCollection('past-events');
-	return pastEvents.map((entry) => ({
-		params: { slug: entry.id },
-		props: { entry },
-	}));
+  const pastEvents = await getCollection("past-events");
+  return pastEvents.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;
@@ -25,94 +25,105 @@ const { entry } = Astro.props;
 // Load all images under src/assets/past-events/** and filter to this event's folder.
 // Expected folder: src/assets/past-events/<slug>/*
 const allEventImages = import.meta.glob<{ default: ImageMetadata }>(
-	"../../assets/past-events/**/*.{jpg,jpeg,png,webp,avif}",
-	{ eager: true }
+  "../../assets/past-events/**/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true },
 );
 
 const images = Object.entries(allEventImages)
-	.filter(([filePath]) => filePath.includes(`/past-events/${entry.id}/`))
-	.sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-	.map(([, mod]) => mod.default);
+  .filter(([filePath]) => filePath.includes(`/past-events/${entry.id}/`))
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([, mod]) => mod.default);
 ---
 
-<BaseLayout title={entry.data.title} description={`Photos from ${entry.data.title}`}>
-	<div class="stack gap-20">
-		<div class="stack gap-15">
-			<header>
-				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/past-events/">
-						<Icon icon="arrow-left" /> Past Events
-					</a>
+<BaseLayout
+  title={entry.data.title}
+  description={`Photos from ${entry.data.title}`}
+>
+  <div class="stack gap-20">
+    <div class="stack gap-15">
+      <header>
+        <div class="wrapper stack gap-2">
+          <a class="back-link" href="/past-events/">
+            <Icon icon="arrow-left" /> Past Events
+          </a>
 
-					<Hero title={entry.data.title} align="start">
-						<div class="details">
-							<p class="description">
-								{entry.data.eventDate.toLocaleDateString("en-US", {
-									dateStyle: "full",
-									timeZone: "America/Phoenix",
-								})}
-							</p>
-						</div>
-					</Hero>
-				</div>
-			</header>
+          <Hero title={entry.data.title} align="start">
+            <div class="details">
+              <p class="description">
+                {
+                  entry.data.eventDate.toLocaleDateString("en-US", {
+                    dateStyle: "full",
+                    timeZone: "America/Phoenix",
+                  })
+                }
+              </p>
+            </div>
+          </Hero>
+        </div>
+      </header>
 
-			<main class="wrapper">
-				<div class="stack gap-10">
-					{images.length > 0 ? (
-						<PhotoSwipeGallery images={images} title={entry.data.title} id={entry.id} />
-					) : (
-						<p>No photos yet for this event.</p>
-					)}
-				</div>
-			</main>
-		</div>
+      <main class="wrapper">
+        <div class="stack gap-10">
+          {
+            images.length > 0 ? (
+              <PhotoSwipeGallery
+                images={images}
+                title={entry.data.title}
+                id={entry.id}
+              />
+            ) : (
+              <p>No photos yet for this event.</p>
+            )
+          }
+        </div>
+      </main>
+    </div>
 
-		<ContactCTA />
-	</div>
+    <ContactCTA />
+  </div>
 </BaseLayout>
 
 <style>
-	header {
-		padding-bottom: 2.5rem;
-		border-bottom: 1px solid var(--gray-800);
-	}
+  header {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--gray-800);
+  }
 
-	.details {
-		display: flex;
-		flex-direction: column;
-		padding: 0.5rem;
-		gap: 1.5rem;
-		justify-content: space-between;
-		align-items: center;
-	}
+  .details {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-	.description {
-		font-size: var(--text-lg);
-		max-width: 54ch;
-	}
+  .description {
+    font-size: var(--text-lg);
+    max-width: 54ch;
+  }
 
-	.back-link {
-		display: none;
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
+  .back-link {
+    display: none;
+    text-decoration: 1px solid underline transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--theme-transition);
+  }
 
-	.back-link:hover,
-	.back-link:focus {
-		text-decoration-color: currentColor;
-	}
+  .back-link:hover,
+  .back-link:focus {
+    text-decoration-color: currentColor;
+  }
 
-	@media (min-width: 50em) {
-		.back-link {
-			display: block;
-			align-self: flex-start;
-		}
+  @media (min-width: 50em) {
+    .back-link {
+      display: block;
+      align-self: flex-start;
+    }
 
-		.details {
-			flex-direction: row;
-			gap: 2.5rem;
-		}
-	}
+    .details {
+      flex-direction: row;
+      gap: 2.5rem;
+    }
+  }
 </style>
