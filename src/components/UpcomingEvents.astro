@@ -35,15 +35,18 @@ const upcoming = (data.events ?? [])
   .slice(0, 5);
 
 function formatEventDate(event: { startDate: Date; allDay?: boolean }) {
+  const timeZone = "America/Phoenix";
+
   const datePart = new Intl.DateTimeFormat("en-US", {
     dateStyle: "medium",
-    timeZone: "America/Phoenix",
+    timeZone,
   }).format(event.startDate);
 
   if (event.allDay) return datePart;
 
   const timePart = new Intl.DateTimeFormat("en-US", {
     timeStyle: "short",
+    timeZone,
   }).format(event.startDate);
 
   return `${datePart} • ${timePart}`;
