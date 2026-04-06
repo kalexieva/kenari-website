@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import pswpInitUrl from "../scripts/PhotoSwipeInitialization.ts?url";
 
 interface Props {
   images: ImageMetadata[];
@@ -43,7 +42,9 @@ const galleryId = id
   }
 </div>
 
-<script type="module" src={pswpInitUrl}></script>
+<script>
+  import "../scripts/PhotoSwipeInitialization";
+</script>
 
 <style>
   .gallery-grid {
